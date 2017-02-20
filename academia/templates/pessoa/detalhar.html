@@ -1,0 +1,73 @@
+{%extends 'layout.html'%}
+{% block conteudo %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Excluir</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir esse pessoa?
+      </div>
+      <div class="modal-footer">
+        <form action="{% url 'pessoa_apagar' pessoa.pk %}" method="POST">{% csrf_token %}
+        	<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-danger">Confirmar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Pessoa</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Detalhes
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<form role="form">
+							<fieldset disabled>
+								<div class="form-group">
+									<label for="disabledSelect">Nome</label>
+									<input class="form-control" id="id_nome" name="nome" type="text" placeholder="{{pessoa.nome}}" disabled>
+								</div>
+								<div class="form-group">
+									<label for="disabledSelect">Idade</label>
+									<input class="form-control" id="id_idade" name="idade" type="number" placeholder="{{pessoa.idade}}" disabled>
+								</div>
+								<div class="form-group">
+									<label for="disabledSelect">Sexo</label>
+									<input class="form-control" id="id_sexo" name="sexo" type="text" placeholder="{{pessoa.sexo}}" disabled>
+								</div>
+								<div class="form-group">
+									<label for="disabledSelect">Usuário</label>
+									<input class="form-control" id="id_usuario" name="usuario" type="text" placeholder="{{pessoa.usuario}}" disabled>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<a href="{% url 'pessoa_listar' %}" class="btn btn-primary">Voltar</a>
+				<a href="{% url 'pessoa_editar' pessoa.pk %}" class="btn btn-warning">Editar</a>
+				<a href="" class="btn btn-info">Avaliação Física</a>
+				<a href="{% url 'treino_adicionar' pessoa.pk %}" class="btn btn-success">Treino</a>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"> Excluir</button>
+			</div>
+		</div>
+		<!-- /.table-responsive -->
+	</div>
+	<!-- /.panel-body -->
+</div>
+<!-- /.panel -->
+{% endblock%}

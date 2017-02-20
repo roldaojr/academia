@@ -1,0 +1,128 @@
+{% extends "base_site.html" %}
+
+{% block conteudo %}
+<h1 class="page-header">Detalhes da Avaliação física</h1>
+<div class="row">
+    <div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Dados</div>
+		    <div class="panel-body">
+		    	<table width="100%">
+		    		<tr>
+		    			<th>Aluno</th>
+		    			<td>{{ avaliacao.pessoa.nome }}</td>
+		    			<th>Data Realizada</th>
+		    			<td>{{ avaliacao.data_realizada }}</td>
+		    			<th>Data Refazer</th>
+		    			<td>{{ avaliacao.data_refazer }}</td>
+		    		</tr>
+		    	</table>
+		    </div>
+		    <div class="panel-footer">
+		    	<a href="{% url 'avaliacao_editar' avaliacao.pk %}" class="btn btn-primary">Editar</a>
+	    	</div>
+		</div>
+    </div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Anamnese</div>
+			<div class="panel-body">
+				{% for resposta in avaliacao.respostas_anamnese.all %}
+				<b>{{ resposta.pergunta.texto }}</b><br>
+				{{ resposta.texto }}<br>
+				{% empty %}
+					Questionário de anamnese não cadastrado
+				{% endfor %}
+		    </div>
+		    <div class="panel-footer">
+		    	<a href="{% url 'anamnese_responder' avaliacao.pk %}" class="btn btn-primary">Editar</a>
+	    	</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Gordura corporal</div>
+			<div class="panel-body">
+				{% if avaliacao.dobra %}
+				<table class="table">
+					<tr><th>Método</th><td>{{ avaliacao.dobra.get_metodo_display|default:'-' }}</td></tr>
+					<tr><th>Resultado</th><td>{{ avaliacao.dobra.resultado|default:'-' }}</td></tr>
+					<tr><th>Tricipes</th><td>{{ avaliacao.dobra.tricipes|default:'-' }}</td></tr>
+					<tr><th>Bicipes</th><td>{{ avaliacao.dobra.bicipes|default:'-' }}</td></tr>
+					<tr><th>Subescapular</th><td>{{ avaliacao.dobra.subescapular|default:'-' }}</td></tr>
+					<tr><th>Suprailiaca</th><td>{{ avaliacao.dobra.suprailiaca|default:'-' }}</td></tr>
+					<tr><th>Toracica</th><td>{{ avaliacao.dobra.toracica|default:'-' }}</td></tr>
+					<tr><th>Axilarmedia</th><td>{{ avaliacao.dobra.axilarmedia|default:'-' }}</td></tr>
+					<tr><th>Abdominal</th><td>{{ avaliacao.dobra.abdominal|default:'-' }}</td></tr>
+					<tr><th>Coxa</th><td>{{ avaliacao.dobra.coxa|default:'-' }}</td></tr>
+					<tr><th>Panturrilha média</th><td>{{ avaliacao.dobra.panturrilhamedia|default:'-' }}</td></tr>
+				</table>
+				{% else %}
+				Nenhuma dado de dobra cadastrado
+				{% endif %}
+		    </div>
+		    <div class="panel-footer">
+		    	{% if avaliacao.dobra %}
+		    	<a href="{% url 'dobra_editar' avaliacao.dobra.pk %}" class="btn btn-primary">Editar</a>
+		    	{% else %}
+				<a href="{% url 'dobra_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
+				{% endif %}
+	    	</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Perimetria</div>
+			<div class="panel-body">
+				{% if avaliacao.perimetria %}
+				<table class="table">
+					<tr>
+						<th>Altura</th><td>{{ avaliacao.perimetria.altura }}</td>
+						<th>Peso</th><td>{{ avaliacao.perimetria.peso }}</td>
+					</tr>
+					<tr>
+						<th>Pescoco</th><td>{{ avaliacao.perimetria.pescoco }}</td>
+						<th>Torax</th><td>{{ avaliacao.perimetria.torax }}</td>
+					</tr>
+					<tr>
+						<th>Cintura</th><td>{{ avaliacao.perimetria.cintura }}</td>
+						<th>Abdome</th><td>{{ avaliacao.perimetria.abdome }}</td>
+					</tr>
+					<tr>
+						<th>Quadril</th><td>{{ avaliacao.perimetria.quadril }}</td>
+						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<th>Bicipes esquerdo</th><td>{{ avaliacao.perimetria.bicipesesquedo }}</td>
+						<th>Bicipes direito</th><td>{{ avaliacao.perimetria.bicipesdireito }}</td>
+					</tr>
+					<tr>
+						<th>Tricipes esquerdo</th><td>{{ avaliacao.perimetria.tricipesesquerdo }}</td>
+						<th>Tricipes direito</th><td>{{ avaliacao.perimetria.tricipesdireito }}</td>
+					</tr>
+					<tr>
+						<th>Antebraco esquerdo</th><td>{{ avaliacao.perimetria.antebracoesquerdo }}</td>
+						<th>Antebraco direito</th><td>{{ avaliacao.perimetria.antebracodireito }}</td>
+					</tr>
+					<tr>
+						<th>Coxa esquerda</th><td>{{ avaliacao.perimetria.coxaesquerda }}</td>
+						<th>Coxa direita</th><td>{{ avaliacao.perimetria.coxadireita }}</td>
+					</tr>
+					<tr>
+						<th>Panturrilha esquerda</th><td>{{ avaliacao.perimetria.panturrilhaesquerda }}</td>
+						<th>Panturrilha direta</th><td>{{ avaliacao.perimetria.panturrilhadireta }}</td>
+					</tr>
+				</table>
+				{% else %}
+				Nenhuma dado de perimetria cadastrado
+				{% endif %}
+		    </div>
+		    <div class="panel-footer">
+		    	{% if avaliacao.perimetria %}
+		    	<a href="{% url 'perimetria_editar' avaliacao.perimetria.pk %}" class="btn btn-primary">Editar</a>
+		    	{% else %}
+				<a href="{% url 'perimetria_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
+				{% endif %}
+	    	</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

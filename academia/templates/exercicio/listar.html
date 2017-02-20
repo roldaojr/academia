@@ -1,0 +1,30 @@
+{% extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Exercícios</h1>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<a href="{% url 'exercicio_adicionar' %}" class="btn btn-success">Adicionar</a>
+	</div>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Imagem</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for exercicio in exercicios %}
+			<tr>
+				<td>{{ exercicio.nome }}</td>
+				<td><img src="{{ exercicio.imagem.url }}" height="150px"></td>
+				<td><a href="{% url 'exercicio_editar' exercicio.pk %}"  class="btn btn-primary">Editar</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

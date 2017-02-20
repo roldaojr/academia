@@ -1,0 +1,31 @@
+{%extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Alunos</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<a href="{% url 'aluno_adicionar' %}" class="btn btn-success">Adicionar</a>
+    </div>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Idade</th>
+			<th>Sexo</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pessoa in pessoas %}
+		<tr>
+			<td>{{ pessoa.nome }}</td>
+			<td>{{ pessoa.idade }}</td>
+			<td>{{ pessoa.get_sexo_display }}</td>
+			<td>
+				<a href="{% url 'aluno_detalhar' pessoa.pk %}"  class="btn btn-sm btn-primary">Detalhes</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base_site.html' %}
+{% load bootstrap3 %}
+{% block conteudo %}
+<!-- Modal -->
+<div class="modal fade" id="serie-apagar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Excluir</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir essa serie?
+      </div>
+      <div class="modal-footer">
+        <form action="" method="POST">{% csrf_token %}
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-danger">Confirmar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="page-header">Treino (série)</h1>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Selecione os Exercícios</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<form role="form" method="post" class="row">{% csrf_token %}
+					<input type="hidden" name="treino" value="{{ treino_id }}">
+					<div class="form-group col-md-6">
+						<label class="control-label" for="id_exercicio">Exercicio</label>
+						<select class="form-control" id="id_exercicio" name="exercicio" title="" required="">
+							<option value="" selected="selected">---------</option>
+							{% for exercicio in exercicios %}
+							<option data-url="{{ exercicio.imagem.url }}" value="{{ exercicio.pk }}">{{ exercicio.nome }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					{% bootstrap_field form.dia form_group_class='form-group col-md-6' %}
+					{% bootstrap_field form.quantidade form_group_class='form-group col-md-6' %}
+					{% bootstrap_field form.repeticao form_group_class='form-group col-md-6' %}
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-success">Adicionar</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-6">
+				<div class="form-group">
+					<img id="img_exercicio" src="" width="350px">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Dias da Semana -->
+<div class="row">
+{% regroup series by get_dia_display as series_list %}
+	{% for serie_item in series_list %}
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<center><b>{{ serie_item.grouper }}</b></center>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+				{% for serie in serie_item.list %}
+					<div class="col-lg-6">
+						<div class="form-group">
+							<table>
+							<tr>
+								<td><label>Exercício: {{ serie.exercicio.nome }}</label></td>
+							</tr>
+							<tr>
+								<td><img src="{{ serie.exercicio.imagem.url }}" height="120px"></td>
+							</tr>
+							<tr>
+								<td align="center">
+									<label>Serie: {{ serie.quantidade }} x {{serie.repeticao}}</label>
+									<button data-url="{% url 'serie_apagar' serie.pk %}" type="button" class="btn btn-danger deletar" data-toggle="modal" data-target="#serie-apagar"> Excluir</button>
+								</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<!-- /.table-responsive -->
+		</div>
+	</div>
+	{% endfor %}
+	<!--/Dias da Semana -->
+</div>
+{% endblock %}
+{% block extrascript %}
+<script>
+$("#id_exercicio").change(function(){
+	url = $('#id_exercicio option:selected').attr('data-url');
+	$('#img_exercicio').attr('src', url);
+})
+
+$(".deletar").click(function(){
+	var url = $(this).data('url');
+	$("#serie-apagar form").attr("action", url);
+})
+</script>
+{% endblock %}

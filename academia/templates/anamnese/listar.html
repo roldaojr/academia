@@ -1,0 +1,29 @@
+{% extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Perguntas Anamnese</h1>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<a href="{% url 'anamnese_adicionar' %}" class="btn btn-success">Adicionar</a>
+	</div>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Pergunta</th>
+				<th>Ativo</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for pergunta in perguntas %}
+			<tr>
+				<td>{{ pergunta.texto }}</td>
+				<td>{{ pergunta.ativo|yesno:'Sim,Não' }}</td>
+				<td><a href="{% url 'anamnese_editar' pergunta.pk %}"  class="btn btn-sm btn-primary">Editar</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

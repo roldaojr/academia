@@ -1,0 +1,94 @@
+{%extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Detalhes do Aluno</h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Dados</div>
+		    <div class="panel-body">
+		    	<table class="table">
+		    		<tr>
+		    			<th>Nome</th>
+		    			<th>Idade</th>
+		    			<th>Sexo</th>
+		    			<th>Usuário</th>
+		    		</tr>
+		    		<tr>
+		    			<td>{{ pessoa.nome }}</td>
+		    			<td>{{ pessoa.idade }}</td>
+		    			<td>{{ pessoa.get_sexo_display }}</td>
+		    			<td>{{ pessoa.login }}</td>
+		    		</tr>
+		    	</table>
+		    </div>
+		    <div class="panel-footer">
+		    	<a href="{% url 'aluno_editar' pessoa.pk %}" class="btn btn-primary">Editar</a>
+		    </div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Treinos</div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Data de Início</th>
+							<th>Data de Fim</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for treino in treinos %}
+						<tr>
+							<td>{{ treino.nome }}</td>
+							<td>{{ treino.data_inicio }}</td>
+							<td>{{ treino.data_fim }}</td>
+							<td></td>
+							<td>
+								<a href="{% url 'serie_listar' treino.pk %}" class="btn btn-sm btn-primary">Detalhes</a>
+								<a href="{% url 'treino_editar' treino.pk %}" class="btn btn-sm btn-default">Editar</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		    <div class="panel-footer">
+				<a href="{% url 'treino_adicionar' pessoa.pk %}" class="btn btn-success">Adicionar</a>
+	    	</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Avalições físicas</div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Data</th>
+							<th>Data Refazer</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for avaliacao in avaliacoes %}
+						<tr>
+							<td>{{ avaliacao.data_realizada }}</td>
+							<td>{{ avaliacao.data_refazer }}</td>
+							<td>
+								<a href="{% url 'avaliacao_detalhar' avaliacao.pk %}" class="btn btn-sm btn-primary">Detalhes</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		    <div class="panel-footer">
+				<a href="{% url 'avaliacao_adicionar' pessoa.pk %}" class="btn btn-success">Adicionar</a>
+	    	</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

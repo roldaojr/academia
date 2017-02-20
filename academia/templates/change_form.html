@@ -1,0 +1,32 @@
+{% extends 'base_site.html' %}
+{% load bootstrap3 %}
+{% block conteudo %}
+<h1 class="page-header">{{ title }}</h1>
+<form role="form" enctype="multipart/form-data" method="POST" class="form-horizontal">
+	{% csrf_token %}
+	<div class="panel panel-default">
+	    <div class="panel-body">
+	    	{% if form.instance.pk %}
+	    	<div class="pull-right">
+	    		<button type="button" data-href="{{ delete_url }}" id="delete-link" class="btn btn-danger">Apagar</button>
+	    	</div>
+	    	{% endif %}
+	    	{% bootstrap_button "Salvar" button_type="submit" button_class="btn-success" %}
+	    </div>
+	</div>
+	{% bootstrap_form form layout='horizontal' %}
+</form>
+{% endblock %}
+
+{% block extrascript %}
+{% include 'delete_dialog.html' %}
+<script>
+$(function() {
+    $("#delete-link").click(function(e) {
+    	href = $(this).data("href")
+    	$("#deletedlg form").attr("action", href)
+    	$("#deletedlg").modal()
+    })
+})
+</script>
+{% endblock %}
