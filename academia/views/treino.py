@@ -12,7 +12,9 @@ def adicionar(request, pk):
     if request.method == 'POST':
         form = TreinoForm(request.POST, initial={'pessoa': pessoa})
         if form.is_valid():
-            treino = form.save()
+            treino = form.save(commit=False)
+            treino.pessoa_id = pk
+            treino.save()
             return redirect(reverse('serie_listar',
                                     kwargs={'pk': treino.pk}))
     else:
