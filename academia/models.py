@@ -1,9 +1,14 @@
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from .percent_gordura import formulas
 
 metodos_percentual_gordura = [(i, f.nome) for i, f in enumerate(formulas)]
+
+
+def refazer_dia():
+    return timezone.now() + timedelta(days=90)
 
 
 class UsuarioManager(BaseUserManager):
@@ -44,7 +49,7 @@ class Exercicio(models.Model):
 
 class AvaliacaoFisica(models.Model):
     data_realizada = models.DateField(default=timezone.now)
-    data_refazer = models.DateField()
+    data_refazer = models.DateField(default=refazer_dia)
     pessoa = models.ForeignKey(Usuario, editable=False)
 
 
