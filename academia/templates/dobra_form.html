@@ -1,0 +1,25 @@
+{% extends 'change_form.html' %}
+{% block extrascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    metodos = JSON.parse('{{ metodos|safe }}')
+
+    function metodo_set_fields() {
+        fields = metodos[$("select[name=metodo]").val()]
+        $("form .form-group").each(function(i, fg) {
+            if(i == 0) return
+            console.log($(fg).find("input").attr("name"), 'in', fields)
+            if(fields.indexOf($(fg).find("input").attr("name")) > -1) {
+                $(fg).find("input").attr("required", "")
+                $(fg).show()
+            } else {
+                $(fg).find("input").attr("required", null)
+                $(fg).hide()
+            }
+        })
+    }
+    $("select[name=metodo]").change(metodo_set_fields)
+    metodo_set_fields()
+})
+</script>
+{% endblock %}

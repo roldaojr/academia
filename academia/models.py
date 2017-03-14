@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from .percent_gordura import formulas
 
-metodos_percentual_gordura = [(i, f.nome) for i, f in enumerate(formulas)]
+metodos_gordura = {f.__name__: f for f in formulas}
+metodos_gordura_nomes = {f.__name__: f.nome for f in formulas}
 
 
 def refazer_dia():
@@ -73,7 +74,7 @@ class RespostaAnamnese(models.Model):
 
 
 class Dobra(models.Model):
-    metodo = models.IntegerField(choices=metodos_percentual_gordura)
+    metodo = models.CharField(max_length=50, choices=metodos_gordura_nomes.items())
     resultado = models.DecimalField(max_digits=5, decimal_places=2, editable=False, default=0)
     tricipes = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     bicipes = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
@@ -87,7 +88,7 @@ class Dobra(models.Model):
     avaliacaofisica = models.OneToOneField(AvaliacaoFisica, editable=False)
 
     def save(self, *args, **kwargs):
-        self.resultado = formulas[self.metodo](self, self.avaliacaofisica.pessoa)
+        self.resultado = metodos_gordura[self.metodo](self, self.avaliacaofisica.pessoa)
         return super(Dobra, self).save(*args, **kwargs)
 
 class Perimetria(models.Model):
