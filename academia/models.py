@@ -115,7 +115,7 @@ class Perimetria(models.Model):
 class Treino(models.Model):
     nome = models.CharField(max_length=100)
     data_inicio = models.DateField(default=timezone.now)
-    data_fim = models.DateField()
+    data_fim = models.DateField(default=refazer_dia)
     pessoa = models.ForeignKey(Usuario)
 
 
