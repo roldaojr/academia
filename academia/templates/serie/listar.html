@@ -32,7 +32,7 @@
 				<form role="form" method="post" class="row">{% csrf_token %}
 					<input type="hidden" name="treino" value="{{ treino_id }}">
 					<div class="form-group col-md-6">
-						<label class="control-label" for="id_exercicio">Exercicio</label>
+						<label class="control-label" for="id_exercicio">Exercício</label>
 						<select class="form-control" id="id_exercicio" name="exercicio" title="" required="">
 							<option value="" selected="selected">---------</option>
 							{% for exercicio in exercicios %}
