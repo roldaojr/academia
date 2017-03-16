@@ -127,7 +127,7 @@ dias_da_semana = (
 
 class Serie(models.Model):
     quantidade = models.IntegerField()
-    repeticao = models.IntegerField()
+    repeticao = models.IntegerField(verbose_name='Repetição')
     dia = models.IntegerField(choices=dias_da_semana)
     exercicio = models.ForeignKey(Exercicio)
     treino = models.ForeignKey(Treino)
