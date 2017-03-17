@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'academia',
+    'graphos',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,4 +1,5 @@
 {%extends 'base_site.html' %}
+{% load static %}
 {% block conteudo %}
 <h1 class="page-header">Detalhes do Aluno</h1>
 <div class="row">
@@ -64,6 +65,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Avaliações Físicas</div>
 		    <div class="panel-body">
+		    	{{ chart.render_html }}
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -91,4 +93,13 @@
 		</div>
 	</div>
 </div>
+{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'vendor/morrisjs/morris.css' %}" type="text/css" />
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript" src="{% static 'vendor/raphael/raphael.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/morrisjs/morris.min.js' %}"></script>
+{{ chart.render_js }}
 {% endblock %}

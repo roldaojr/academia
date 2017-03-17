@@ -1,8 +1,22 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.utils.encoding import smart_text
+from django.utils.formats import date_format
+from graphos.sources.simple import SimpleDataSource
+from graphos.renderers.morris import LineChart
 from ..models import Usuario, Treino, AvaliacaoFisica
 from ..forms import AdicionarPessoaForm, EditarPessoaForm
+
+
+def gerar_grafico(avaliacoes):
+    linhas = [['Data', '% de Gordura']]
+    for av in avaliacoes.values_list('data_realizada', 'dobra__resultado')[:10]:
+        linhas.append((
+            date_format(av[0], format='SHORT_DATE_FORMAT'),
+            float(av[1])
+        ))
+    return linhas
 
 
 @login_required
@@ -16,8 +30,11 @@ def detalhar(request, pk):
     pessoa = Usuario.objects.get(pk=pk)
     treinos = Treino.objects.filter(pessoa=pessoa.pk)
     avaliacoes = AvaliacaoFisica.objects.filter(pessoa=pessoa.pk)
+    chart_ds = SimpleDataSource(gerar_grafico(avaliacoes))
+    chart = LineChart(chart_ds)
     return render(request, 'aluno/detalhar.html', {
-        'pessoa': pessoa, 'treinos': treinos, 'avaliacoes': avaliacoes
+        'pessoa': pessoa, 'treinos': treinos, 'avaliacoes': avaliacoes,
+        'chart': chart
     })
 
 
