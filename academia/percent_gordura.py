@@ -43,9 +43,9 @@ def densidade2gordura(densidade, pessoa):
 def durnin_womersley_1974(dobras, pessoa):
     soma = dobras.tricipes + dobras.bicipes + dobras.subescapular + dobras.suprailiaca
     if pessoa.sexo == 1:
-        densidade = Decimal(1.1765) - Decimal(0.0744) * log10(soma)
+        densidade = Decimal(1.1765) - Decimal(0.0744) * Decimal(log10(soma))
     else:
-        densidade = Decimal(1.1567) - Decimal(0.0717) * log10(soma)
+        densidade = Decimal(1.1567) - Decimal(0.0717) * Decimal(log10(soma))
     return densidade2gordura(densidade, pessoa)
 
 durnin_womersley_1974.nome = 'Durnin Womersley 1974'
@@ -71,7 +71,7 @@ jackson_pollock_ward_1980.dobras = (
 def pestroski_1995_mulher(dobras, pessoa):
     soma = dobras.axilarmedia + dobras.suprailiaca + dobras.coxa + \
            dobras.panturrilhamedia
-    densidade = Decimal(1.1954713) - Decimal(0.07513507) * log10(soma) - \
+    densidade = Decimal(1.1954713) - Decimal(0.07513507) * Decimal(log10(soma)) - \
                 Decimal(0.00041072) * pessoa.idade
     return densidade2gordura(densidade, pessoa)
 
@@ -99,7 +99,8 @@ pollock_schimidt_jackson_1980.dobras = (
 
 def jackson_pollock_1978(dobras, pessoa):
     soma = dobras.toracica + dobras.abdominal + dobras.coxa
-    densidade = Decimal(0.03049) + log10(soma) - Decimal(0.00027) * pessoa.idade
+    densidade = Decimal(0.03049) + Decimal(log10(soma)) - Decimal(0.00027) * \
+                pessoa.idade
     return densidade2gordura(densidade, pessoa)
 
 jackson_pollock_1978.nome = 'Jackson, Pollock 1984'
