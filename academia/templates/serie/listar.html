@@ -57,9 +57,11 @@
 	</div>
 </div>
 <!-- Dias da Semana -->
-<div class="row">
 {% regroup series by get_dia_display as series_list %}
-	{% for serie_item in series_list %}
+{% for serie_item in series_list %}
+{% if forloop.counter|divisibleby:2 %}
+<div class="row">
+{% endif %}
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -92,9 +94,11 @@
 			<!-- /.table-responsive -->
 		</div>
 	</div>
-	{% endfor %}
-	<!--/Dias da Semana -->
+{% if forloop.counter|divisibleby:2 %}
 </div>
+{% endif %}
+{% endfor %}
+<!--/Dias da Semana -->
 {% endblock %}
 {% block extrascript %}
 <script>
