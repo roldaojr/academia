@@ -44,7 +44,7 @@
 				{% if avaliacao.dobra %}
 				<table class="table">
 					<tr><th>Método</th><td>{{ avaliacao.dobra.get_metodo_display|default:'-' }}</td></tr>
-					<tr><th>Resultado</th><td>{{ avaliacao.dobra.resultado|default:'-' }}</td></tr>
+					<tr><th>Resultado</th><td>{{ avaliacao.dobra.resultado|floatformat:2|default:'-' }}</td></tr>
 					<tr><th>Tricipes</th><td>{{ avaliacao.dobra.tricipes|default:'-' }}</td></tr>
 					<tr><th>Bicipes</th><td>{{ avaliacao.dobra.bicipes|default:'-' }}</td></tr>
 					<tr><th>Subescapular</th><td>{{ avaliacao.dobra.subescapular|default:'-' }}</td></tr>
