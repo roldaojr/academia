@@ -1,47 +1,35 @@
-{%extends 'layout.html'%}
+{% extends 'base_site.html' %}
 {% block conteudo %}
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">Pessoa</h1>
-	</div>
-	<!-- /.col-lg-12 -->
+<h1 class="page-header">Usuários</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<a href="{% url 'pessoa_adicionar' %}" class="btn btn-success">Adicionar</a>
+    </div>
 </div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Lista de pessoas
-			</div>
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Idade</th>
-								<th>Sexo</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for pessoa in pessoas %}
-							<tr>
-								<td>{{ pessoa.nome }}</td>
-								<td>{{ pessoa.idade }}</td>
-								<td>{{ pessoa.get_sexo_display }}</td>
-								<td><a href="{% url 'pessoa_detalhar' pessoa.pk %}"  class="btn btn-primary">Detalhes</a></td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-					<a href="{% url 'pessoa_adicionar' %}" class="btn btn-success">Adicionar</a>
-				</div>
-				<!-- /.table-responsive -->
-			</div>
-			<!-- /.panel-body -->
-		</div>
-		<!-- /.panel -->
-	</div>
-</div>
-{% endblock%}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Login</th>
+			<th>Tipo</th>
+			<th>Nome</th>
+			<th>Idade</th>
+			<th>Sexo</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pessoa in pessoas %}
+		<tr>
+			<td>{{ pessoa.login }}</td>
+			<td>{{ pessoa.get_tipo_display }}</td>
+			<td>{{ pessoa.nome|default:'-' }}</td>
+			<td>{{ pessoa.idade|default:'-' }}</td>
+			<td>{{ pessoa.get_sexo_display|default:'-' }}</td>
+			<td>
+				<a href="{% url 'pessoa_editar' pessoa.pk %}"  class="btn btn-sm btn-primary">Editar</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

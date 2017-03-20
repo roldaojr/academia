@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^pessoa/adicionar$', pessoa.adicionar, name='pessoa_adicionar'),
     url(r'^pessoa/editar/(?P<pk>\d+)$', pessoa.editar, name='pessoa_editar'),
     url(r'^pessoa/apagar/(?P<pk>\d+)$', pessoa.apagar, name='pessoa_apagar'),
-    url(r'^pessoa/detalhar/(?P<pk>\d+)$', pessoa.detalhar,name='pessoa_detalhar'),
     url(r'^pessoa$', pessoa.listar, name='pessoa_listar'),
 
     url(r'^exercicio/adicionar$', exercicio.adicionar, name='exercicio_adicionar'),

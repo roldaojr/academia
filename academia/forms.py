@@ -3,6 +3,14 @@ from django.forms.models import modelform_factory
 from bootstrap3_datetime.widgets import DateTimePicker
 from .models import Usuario, Treino, AvaliacaoFisica, RespostaAnamnese
 
+AdicionarUsuarioForm = modelform_factory(Usuario, fields=(
+    'nome', 'idade', 'sexo', 'tipo', 'login', 'password'
+))
+
+EditarUsuarioForm = modelform_factory(Usuario, fields=(
+    'nome', 'idade', 'sexo', 'tipo', 'login'
+))
+
 AdicionarPessoaForm = modelform_factory(Usuario, fields=(
     'nome', 'idade', 'sexo', 'login', 'password'
 ))

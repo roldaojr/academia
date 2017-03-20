@@ -37,7 +37,7 @@ class Usuario(AbstractBaseUser):
     idade = models.IntegerField(null=True)
     sexo = models.IntegerField(choices=((1, 'Masculino'), (2, 'Feminino')), null=True)
     login = models.CharField(max_length=10, unique=True)
-    tipo = models.IntegerField(default=1)
+    tipo = models.IntegerField(default=1, choices=((3, 'Administrador'), (1, 'Aluno'), (2, 'Treinador')))
 
     objects = UsuarioManager()
     USERNAME_FIELD = 'login'

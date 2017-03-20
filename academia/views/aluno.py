@@ -14,7 +14,7 @@ def gerar_grafico(avaliacoes):
     for av in avaliacoes.values_list('data_realizada', 'dobra__resultado')[:10]:
         linhas.append((
             date_format(av[0], format='SHORT_DATE_FORMAT'),
-            round(float(av[1]), 2)
+            round(float(av[1]), 2) if av[1] else 0
         ))
     return linhas
 
