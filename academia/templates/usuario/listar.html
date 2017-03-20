@@ -3,7 +3,7 @@
 <h1 class="page-header">Usuários</h1>
 <div class="panel panel-default">
     <div class="panel-body">
-    	<a href="{% url 'pessoa_adicionar' %}" class="btn btn-success">Adicionar</a>
+    	<a href="{% url 'usuario_adicionar' %}" class="btn btn-success">Adicionar</a>
     </div>
 </div>
 <table class="table table-striped">
@@ -18,15 +18,15 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for pessoa in pessoas %}
+		{% for usuario in usuarios %}
 		<tr>
-			<td>{{ pessoa.login }}</td>
-			<td>{{ pessoa.get_tipo_display }}</td>
-			<td>{{ pessoa.nome|default:'-' }}</td>
-			<td>{{ pessoa.idade|default:'-' }}</td>
-			<td>{{ pessoa.get_sexo_display|default:'-' }}</td>
+			<td>{{ usuario.login }}</td>
+			<td>{{ usuario.get_tipo_display }}</td>
+			<td>{{ usuario.nome|default:'-' }}</td>
+			<td>{{ usuario.idade|default:'-' }}</td>
+			<td>{{ usuario.get_sexo_display|default:'-' }}</td>
 			<td>
-				<a href="{% url 'pessoa_editar' pessoa.pk %}"  class="btn btn-sm btn-primary">Editar</a>
+				<a href="{% url 'usuario_editar' usuario.pk %}"  class="btn btn-sm btn-primary">Editar</a>
 			</td>
 		</tr>
 		{% endfor %}

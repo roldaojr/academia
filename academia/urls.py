@@ -1,16 +1,16 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import (index, pessoa, exercicio, treino, serie, aluno, avaliacao,
+from .views import (index, usuario, exercicio, treino, serie, aluno, avaliacao,
                     perimetria, dobra, anamnese_pergunta, anamnese_resposta)
 
 
 urlpatterns = [
     url(r'^$', index, name='index'),
-    url(r'^pessoa/adicionar$', pessoa.adicionar, name='pessoa_adicionar'),
-    url(r'^pessoa/editar/(?P<pk>\d+)$', pessoa.editar, name='pessoa_editar'),
-    url(r'^pessoa/apagar/(?P<pk>\d+)$', pessoa.apagar, name='pessoa_apagar'),
-    url(r'^pessoa$', pessoa.listar, name='pessoa_listar'),
+    url(r'^usuario/adicionar$', usuario.adicionar, name='usuario_adicionar'),
+    url(r'^usuario/editar/(?P<pk>\d+)$', usuario.editar, name='usuario_editar'),
+    url(r'^usuario/apagar/(?P<pk>\d+)$', usuario.apagar, name='usuario_apagar'),
+    url(r'^usuario$', usuario.listar, name='usuario_listar'),
 
     url(r'^exercicio/adicionar$', exercicio.adicionar, name='exercicio_adicionar'),
     url(r'^exercicio/editar/(?P<pk>\d+)$', exercicio.editar, name='exercicio_editar'),

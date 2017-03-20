@@ -8,8 +8,8 @@ from ..forms import AdicionarUsuarioForm, EditarUsuarioForm
 
 @login_required
 def listar(request):
-    pessoas = Usuario.objects.exclude(tipo=1)
-    return render(request, 'pessoa/listar.html', {'pessoas': pessoas})
+    usuarios = Usuario.objects.exclude(tipo=1)
+    return render(request, 'usuario/listar.html', {'usuarios': usuarios})
 
 
 @login_required
@@ -18,30 +18,30 @@ def adicionar(request):
         form = AdicionarUsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('pessoa_listar'))
+            return redirect(reverse('usuario_listar'))
     else:
         form = AdicionarUsuarioForm()
     return render(request, 'change_form.html',
-                  {'form': form, 'title': 'Adicionar usuário'})
+                  {'form': form, 'title': 'Adicionar Usuário'})
 
 
 @login_required
 def editar(request, pk):
-    pessoa = Usuario.objects.get(pk=pk)
+    usuario = Usuario.objects.get(pk=pk)
     if request.method == 'POST':
-        form = EditarUsuarioForm(request.POST, instance=pessoa)
+        form = EditarUsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-            return redirect(reverse('pessoa_listar'))
+            return redirect(reverse('usuario_listar'))
     else:
-        form = EditarUsuarioForm(instance=pessoa)
+        form = EditarUsuarioForm(instance=usuario)
     return render(request, 'change_form.html',
                   {'form': form, 'title': 'Editar Usuário'})
 
 
 @login_required
 def apagar(request, pk):
-    pessoa = Usuario.objects.get(pk=pk)
+    usuario = Usuario.objects.get(pk=pk)
     if request.method == 'POST':
-        pessoa.delete()
-    return redirect(reverse('pessoa_listar'))
+        usuario.delete()
+    return redirect(reverse('usuario_listar'))
