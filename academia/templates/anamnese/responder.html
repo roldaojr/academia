@@ -7,6 +7,9 @@
 	{% csrf_token %}
 	{{ formset.management_form }}
     {% for form in formset %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
         <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
                 <b>{{ form.instance.pergunta }}</b>

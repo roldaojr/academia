@@ -7,7 +7,7 @@ from ..models import RespostaAnamnese, PerguntaAnamnese, AvaliacaoFisica
 
 
 RespostaAnamneseFormSet = inlineformset_factory(
-    AvaliacaoFisica, RespostaAnamnese, extra=0, fields = ('__all__'))
+    AvaliacaoFisica, RespostaAnamnese, extra=0, fields=('texto', 'observacao'))
 
 
 @login_required

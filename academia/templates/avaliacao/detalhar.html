@@ -29,7 +29,7 @@
 			<div class="panel-body">
 				{% for resposta in avaliacao.respostas_anamnese.all %}
 				<b>{{ resposta.pergunta.texto }}</b><br>
-				{{ resposta.texto }}<br>
+				{{ resposta.texto|default:'-' }}<br>
 				{% empty %}
 					Questionário de anamnese não cadastrado
 				{% endfor %}
