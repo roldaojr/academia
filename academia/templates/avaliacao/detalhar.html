@@ -38,35 +38,6 @@
 		    	<a href="{% url 'anamnese_responder' avaliacao.pk %}" class="btn btn-primary">Editar</a>
 	    	</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">Gordura Corporal</div>
-			<div class="panel-body">
-				{% if avaliacao.dobra %}
-				<table class="table">
-					<tr><th>Método</th><td>{{ avaliacao.dobra.get_metodo_display|default:'-' }}</td></tr>
-					<tr><th>Resultado</th><td>{{ avaliacao.dobra.resultado|floatformat:2|default:'-' }}</td></tr>
-					<tr><th>Tricipes</th><td>{{ avaliacao.dobra.tricipes|default:'-' }}</td></tr>
-					<tr><th>Bicipes</th><td>{{ avaliacao.dobra.bicipes|default:'-' }}</td></tr>
-					<tr><th>Subescapular</th><td>{{ avaliacao.dobra.subescapular|default:'-' }}</td></tr>
-					<tr><th>Suprailiaca</th><td>{{ avaliacao.dobra.suprailiaca|default:'-' }}</td></tr>
-					<tr><th>Toracica</th><td>{{ avaliacao.dobra.toracica|default:'-' }}</td></tr>
-					<tr><th>Axilarmedia</th><td>{{ avaliacao.dobra.axilarmedia|default:'-' }}</td></tr>
-					<tr><th>Abdominal</th><td>{{ avaliacao.dobra.abdominal|default:'-' }}</td></tr>
-					<tr><th>Coxa</th><td>{{ avaliacao.dobra.coxa|default:'-' }}</td></tr>
-					<tr><th>Panturrilha média</th><td>{{ avaliacao.dobra.panturrilhamedia|default:'-' }}</td></tr>
-				</table>
-				{% else %}
-				Nenhuma dado de dobra cadastrado
-				{% endif %}
-		    </div>
-		    <div class="panel-footer">
-		    	{% if avaliacao.dobra %}
-		    	<a href="{% url 'dobra_editar' avaliacao.dobra.pk %}" class="btn btn-primary">Editar</a>
-		    	{% else %}
-				<a href="{% url 'dobra_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
-				{% endif %}
-	    	</div>
-		</div>
 	</div>
 	<div class="col-md-6">
 		<div class="panel panel-default">
@@ -120,6 +91,47 @@
 		    	<a href="{% url 'perimetria_editar' avaliacao.perimetria.pk %}" class="btn btn-primary">Editar</a>
 		    	{% else %}
 				<a href="{% url 'perimetria_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
+				{% endif %}
+	    	</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Gordura Corporal</div>
+			<div class="panel-body">
+				{% if avaliacao.dobra %}
+				<table class="table">
+					<tr><th>Método</th><td colspan="3">{{ avaliacao.dobra.get_metodo_display|default:'-' }}</td></tr>
+					<tr><th>Resultado</th><td colspan="3">{{ avaliacao.dobra.resultado|floatformat:2|default:'-' }}</td></tr>
+					<tr>
+						<th>Tricipes</th><td>{{ avaliacao.dobra.tricipes|default:'-' }}</td>
+						<th>Bicipes</th><td>{{ avaliacao.dobra.bicipes|default:'-' }}</td>
+					</tr>
+					<tr>
+						<th>Subescapular</th><td>{{ avaliacao.dobra.subescapular|default:'-' }}</td>
+						<th>Suprailiaca</th><td>{{ avaliacao.dobra.suprailiaca|default:'-' }}</td>
+					</tr>
+					<tr>
+						<th>Toracica</th><td>{{ avaliacao.dobra.toracica|default:'-' }}</td>
+						<th>Axilarmedia</th><td>{{ avaliacao.dobra.axilarmedia|default:'-' }}</td>
+					</tr>
+					<tr>
+						<th>Abdominal</th><td>{{ avaliacao.dobra.abdominal|default:'-' }}</td>
+						<th>Coxa</th><td>{{ avaliacao.dobra.coxa|default:'-' }}</td>
+					</tr>
+					<tr>
+						<th>Panturrilha média</th><td colspan="3">{{ avaliacao.dobra.panturrilhamedia|default:'-' }}</td>
+					</tr>
+				</table>
+				{% else %}
+				Nenhuma dado de dobra cadastrado
+				{% endif %}
+		    </div>
+		    <div class="panel-footer">
+		    	{% if avaliacao.dobra %}
+		    	<a href="{% url 'dobra_editar' avaliacao.dobra.pk %}" class="btn btn-primary">Editar</a>
+		    	{% else %}
+				<a href="{% url 'dobra_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
 				{% endif %}
 	    	</div>
 		</div>
