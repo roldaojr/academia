@@ -1,0 +1,7 @@
+{% extends 'change_form.html' %}
+{% block actions %}
+{{ block.super }}
+{% if form.instance.pk and form.instance != request.user %}
+<a href="{% url 'usuario_mudar_senha' form.instance.pk %}" class="btn btn-default">Alterar senha</a>
+{% endif %}
+{% endblock %}

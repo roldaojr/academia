@@ -23,7 +23,7 @@
 </div>
 
 <h1 class="page-header">Treino (série)</h1>
-
+{% if request.user.tipo > 1 %}
 <div class="panel panel-default">
 	<div class="panel-heading">Selecione os Exercícios</div>
 	<div class="panel-body">
@@ -56,6 +56,7 @@
 		</div>
 	</div>
 </div>
+{% endif %}
 <!-- Dias da Semana -->
 {% regroup series by get_dia_display as series_list %}
 {% for serie_item in series_list %}
@@ -82,7 +83,9 @@
 							<tr>
 								<td align="center">
 									<label>Serie: {{ serie.quantidade }} x {{serie.repeticao}}</label>
+									{% if request.user.tipo > 1 %}
 									<button data-url="{% url 'serie_apagar' serie.pk %}" type="button" class="btn btn-danger deletar" data-toggle="modal" data-target="#serie-apagar"> Excluir</button>
+									{% endif %}
 								</td>
 							</tr>
 							</table>

@@ -22,9 +22,11 @@
 		    		</tr>
 		    	</table>
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 		    	<a href="{% url 'aluno_editar' pessoa.pk %}" class="btn btn-primary">Editar</a>
 		    </div>
+		    {% endif %}
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -49,16 +51,20 @@
 							<td></td>
 							<td>
 								<a href="{% url 'serie_listar' treino.pk %}" class="btn btn-sm btn-primary">Detalhes</a>
+								{% if request.user.tipo > 1 %}
 								<a href="{% url 'treino_editar' treino.pk %}" class="btn btn-sm btn-default">Editar</a>
+								{% endif %}
 							</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 				</table>
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 				<a href="{% url 'treino_adicionar' pessoa.pk %}" class="btn btn-success">Adicionar</a>
 	    	</div>
+	    	{% endif %}
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -87,9 +93,11 @@
 					</tbody>
 				</table>
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 				<a href="{% url 'avaliacao_adicionar' pessoa.pk %}" class="btn btn-success">Adicionar</a>
 	    	</div>
+	    	{% endif %}
 		</div>
 	</div>
 </div>

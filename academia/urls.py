@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^usuario/adicionar$', usuario.adicionar, name='usuario_adicionar'),
     url(r'^usuario/editar/(?P<pk>\d+)$', usuario.editar, name='usuario_editar'),
+    url(r'^usuario/alterar-senha/(?P<pk>\d+)$', usuario.alterar_senha,
+        name='usuario_mudar_senha'),
     url(r'^usuario/apagar/(?P<pk>\d+)$', usuario.apagar, name='usuario_apagar'),
     url(r'^usuario$', usuario.listar, name='usuario_listar'),
 
@@ -27,7 +29,8 @@ urlpatterns = [
 
     url(r'^aluno/adicionar$', aluno.adicionar, name='aluno_adicionar'),
     url(r'^aluno/editar/(?P<pk>\d+)$', aluno.editar, name='aluno_editar'),
-    url(r'^aluno/detalhar/(?P<pk>\d+)$', aluno.detalhar,name='aluno_detalhar'),
+    url(r'^aluno/detalhar/(?P<pk>\d+)$', aluno.detalhar, name='aluno_detalhar'),
+    url(r'^aluno/apagar/(?P<pk>\d+)$', aluno.apagar, name='aluno_apagar'),
     url(r'^aluno/listar$', aluno.listar, name='aluno_listar'),
 
     url(r'^treino/adicionar/(?P<pk>\d+)$', treino.adicionar, name='treino_adicionar'),

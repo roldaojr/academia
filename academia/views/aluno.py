@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.encoding import smart_text
 from django.utils.formats import date_format
 from graphos.sources.simple import SimpleDataSource
 from graphos.renderers.morris import LineChart
+
 from ..models import Usuario, Treino, AvaliacaoFisica
 from ..forms import AdicionarPessoaForm, EditarPessoaForm
 
@@ -20,6 +22,7 @@ def gerar_grafico(avaliacoes):
 
 
 @login_required
+@user_passes_test(lambda u: u.tipo > 1)
 def listar(request):
     pessoas = Usuario.objects.filter(tipo=1)
     return render(request, 'aluno/listar.html', {'pessoas': pessoas})
@@ -27,6 +30,8 @@ def listar(request):
 
 @login_required
 def detalhar(request, pk):
+    if request.user.tipo == 1 and str(request.user.pk) != pk:
+        raise PermissionDenied
     pessoa = Usuario.objects.get(pk=pk)
     treinos = Treino.objects.filter(pessoa=pessoa.pk)
     avaliacoes = AvaliacaoFisica.objects.filter(pessoa=pessoa.pk)
@@ -39,6 +44,7 @@ def detalhar(request, pk):
 
 
 @login_required
+@user_passes_test(lambda u: u.tipo > 1)
 def apagar(request, pk):
     pessoa = Usuario.objects.get(pk=pk)
     if request.method == 'POST':
@@ -47,6 +53,7 @@ def apagar(request, pk):
 
 
 @login_required
+@user_passes_test(lambda u: u.tipo > 1)
 def adicionar(request):
     if request.method == 'POST':
         form = AdicionarPessoaForm(request.POST)
@@ -62,6 +69,7 @@ def adicionar(request):
 
 
 @login_required
+@user_passes_test(lambda u: u.tipo > 1)
 def editar(request, pk):
     pessoa = Usuario.objects.get(pk=pk)
     if request.method == 'POST':
@@ -71,7 +79,7 @@ def editar(request, pk):
             return redirect(reverse('aluno_detalhar', kwargs={'pk': pk}))
     else:
         form = EditarPessoaForm(instance=pessoa)
-    return render(request, 'change_form.html', {
+    return render(request, 'usuario/form.html', {
         'form': form, 'title': 'Editar Aluno',
-        'tipo': 'aluno', 'delete_url': reverse('pessoa_apagar', kwargs={'pk': pk})
+        'tipo': 'aluno', 'delete_url': reverse('aluno_apagar', kwargs={'pk': pk})
     })

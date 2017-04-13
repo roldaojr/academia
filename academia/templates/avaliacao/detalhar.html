@@ -18,9 +18,11 @@
 		    		</tr>
 		    	</table>
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 		    	<a href="{% url 'avaliacao_editar' avaliacao.pk %}" class="btn btn-primary">Editar</a>
 	    	</div>
+	    	{% endif %}
 		</div>
     </div>
 	<div class="col-md-6">
@@ -34,9 +36,11 @@
 					Questionário de anamnese não cadastrado
 				{% endfor %}
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 		    	<a href="{% url 'anamnese_responder' avaliacao.pk %}" class="btn btn-primary">Editar</a>
 	    	</div>
+	    	{% endif %}
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -86,6 +90,7 @@
 				Nenhuma dado de perimetria cadastrado
 				{% endif %}
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 		    	{% if avaliacao.perimetria %}
 		    	<a href="{% url 'perimetria_editar' avaliacao.perimetria.pk %}" class="btn btn-primary">Editar</a>
@@ -93,6 +98,7 @@
 				<a href="{% url 'perimetria_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
 				{% endif %}
 	    	</div>
+	    	{% endif %}
 		</div>
 	</div>
 	<div class="col-md-6">
@@ -127,6 +133,7 @@
 				Nenhuma dado de dobra cadastrado
 				{% endif %}
 		    </div>
+		    {% if request.user.tipo > 1 %}
 		    <div class="panel-footer">
 		    	{% if avaliacao.dobra %}
 		    	<a href="{% url 'dobra_editar' avaliacao.dobra.pk %}" class="btn btn-primary">Editar</a>
@@ -134,6 +141,7 @@
 				<a href="{% url 'dobra_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
 				{% endif %}
 	    	</div>
+	    	{% endif %}
 		</div>
 	</div>
 </div>
