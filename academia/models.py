@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -5,7 +6,7 @@ from django.utils import timezone
 from .percent_gordura import formulas
 
 metodos_gordura = {f.__name__: f for f in formulas}
-metodos_gordura_nomes = {f.__name__: f.nome for f in formulas}
+metodos_gordura_nomes = OrderedDict(sorted(((f.__name__, f.nome) for f in formulas)))
 
 
 def refazer_dia():
