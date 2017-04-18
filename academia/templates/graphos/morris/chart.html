@@ -16,11 +16,19 @@ var morris_dict = {
   // post units
   postUnits: '{{ chart.get_options.postUnits|safe }}',
   preUnits: '{{ chart.get_options.preUnits|safe }}',
+  
+  xLabelFormat: function(x) {
+    return x.getDate()+'-'+x.getMonth()+'-'+x.getYear() % 100
+  },
+  dateFormat: function(ms) {
+    dt = new Date(ms)
+    return dt.getDate()+'-'+dt.getMonth()+'-'+dt.getYear() % 100
+  }
 };
 for(option in options) {
   morris_dict[option] = options[option];
 }
 $(document).ready(function() {
-    new Morris.{{ chart.chart_type }}(morris_dict);
+  new Morris.{{ chart.chart_type }}(morris_dict);
 })
 </script>

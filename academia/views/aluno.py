@@ -12,11 +12,10 @@ from ..forms import AdicionarPessoaForm, EditarPessoaForm
 
 
 def gerar_grafico(avaliacoes):
-    linhas = [['Data', '% de Gordura']]
+    linhas = [('Data', '% de Gordura')]
     for av in avaliacoes.values_list('data_realizada', 'dobra__resultado')[:10]:
         linhas.append((
-            date_format(av[0], format='SHORT_DATE_FORMAT'),
-            round(float(av[1]), 2) if av[1] else 0
+            av[0], round(float(av[1]), 2) if av[1] else 0
         ))
     return linhas
 

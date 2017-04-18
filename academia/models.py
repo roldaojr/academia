@@ -54,6 +54,9 @@ class AvaliacaoFisica(models.Model):
     data_refazer = models.DateField(default=refazer_dia)
     pessoa = models.ForeignKey(Usuario, editable=False)
 
+    class Meta:
+        ordering = ('data_realizada',)
+
 
 class PerguntaAnamnese(models.Model):
     texto = models.CharField(max_length=500)
