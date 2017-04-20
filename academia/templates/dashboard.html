@@ -1,0 +1,112 @@
+{%extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Dashboard</h1>
+<div class="col-md-12">
+	<div class="col-md-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><b>Treinos Expirado</b></div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						    <th>Aluno</th>
+							<th>Treino</th>
+							<th>Data de Fim</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for treino in treinos %}
+						<tr class="danger">
+						    <td>{{treino.pessoa.nome}}</td>
+							<td>{{ treino.nome }}</td>
+							<td>{{ treino.data_fim }}</td>
+							<td></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		</div>
+
+		<div class="panel panel-warning">
+			<div class="panel-heading"><b>Treinos Expirando</b></div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						    <th>Aluno</th>
+							<th>Treino</th>
+							<th>Data de Fim</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for treino in texpirando %}
+						<tr class="warning">
+						    <td>{{treino.pessoa.nome}}</td>
+							<td>{{ treino.nome }}</td>
+							<td>{{ treino.data_fim }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		</div>
+	</div>
+	
+	<!-- <div class="col-md-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><b>Avaliações Físicas Expirada</b></div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						    <th>Aluno</th>
+							<th>Treino</th>
+							<th>Data de Fim</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for treino in treinos %}
+						<tr class="danger">
+						    <td>{{treino.pessoa.nome}}</td>
+							<td>{{ treino.nome }}</td>
+							<td>{{ treino.data_fim }}</td>
+							<td></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		</div>
+
+		<div class="panel panel-warning">
+			<div class="panel-heading"><b>Avaliações Físicas Expirando</b></div>
+		    <div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						    <th>Aluno</th>
+							<th>Treino</th>
+							<th>Data de Fim</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for treino in treinos %}
+						<tr class="warning">
+						    <td>{{treino.pessoa.nome}}</td>
+							<td>{{ treino.nome }}</td>
+							<td>{{ treino.data_fim }}</td>
+							<td></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		    </div>
+		</div>
+	</div> -->
+
+</div>
+{% endblock %}

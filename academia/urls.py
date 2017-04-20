@@ -1,12 +1,12 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import (index, usuario, exercicio, treino, serie, aluno, avaliacao,
+from .views import (dashboard, usuario, exercicio, treino, serie, aluno, avaliacao,
                     perimetria, dobra, anamnese_pergunta, anamnese_resposta)
 
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    url(r'^$', dashboard.treinoexpirado, name='index'),
     url(r'^usuario/adicionar$', usuario.adicionar, name='usuario_adicionar'),
     url(r'^usuario/editar/(?P<pk>\d+)$', usuario.editar, name='usuario_editar'),
     url(r'^usuario/alterar-senha/(?P<pk>\d+)$', usuario.alterar_senha,

@@ -19,10 +19,7 @@
                         <i class="fa fa-user fa-fw"></i>{{ request.user }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
-                        </li>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                         </li>
@@ -38,7 +35,9 @@
                         <li><a href="{% url 'aluno_detalhar' request.user.pk %}"><i class="fa fa-home fa-fw"></i> Aluno</a></li>
                         {% endif %}
                         {% if request.user.tipo > 1 %}
+                        <li><a href="{% url 'index' %}"><i class="fa fa-home fa-fw"></i> Home</a></li>
                         <li><a href="{% url 'aluno_listar' %}"><i class="fa fa-user fa-fw"></i> Alunos</a></li>
+                        <li><label>Configurações</label></li>
                         <li><a href="{% url 'exercicio_listar' %}"><i class="fa fa-child fa-fw"></i> Exercícios</a></li>
                         <li><a href="{% url 'anamnese_listar' %}"><i class="fa fa-edit fa-fw"></i> Perguntas Anamnese</a></li>
                         {% endif %}
