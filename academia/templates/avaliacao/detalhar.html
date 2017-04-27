@@ -27,24 +27,6 @@
     </div>
 	<div class="col-md-6">
 		<div class="panel panel-default">
-			<div class="panel-heading">Anamnese</div>
-			<div class="panel-body">
-				{% for resposta in avaliacao.respostas_anamnese.all %}
-				<b>{{ resposta.pergunta.texto }}</b><br>
-				{{ resposta.texto|default:'-' }}<br>
-				{% empty %}
-					Questionário de anamnese não cadastrado
-				{% endfor %}
-		    </div>
-		    {% if request.user.tipo > 1 %}
-		    <div class="panel-footer">
-		    	<a href="{% url 'anamnese_responder' avaliacao.pk %}" class="btn btn-primary">Editar</a>
-	    	</div>
-	    	{% endif %}
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="panel panel-default">
 			<div class="panel-heading">Perimetria</div>
 			<div class="panel-body">
 				{% if avaliacao.perimetria %}
@@ -140,6 +122,24 @@
 		    	{% else %}
 				<a href="{% url 'dobra_adicionar' avaliacao.pk %}" class="btn btn-primary">Cadastrar</a>
 				{% endif %}
+	    	</div>
+	    	{% endif %}
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Anamnese</div>
+			<div class="panel-body">
+				{% for resposta in avaliacao.respostas_anamnese.all %}
+				<b>{{ resposta.pergunta.texto }}</b><br>
+				{{ resposta.texto|default:'-' }}<br>
+				{% empty %}
+					Questionário de anamnese não cadastrado
+				{% endfor %}
+		    </div>
+		    {% if request.user.tipo > 1 %}
+		    <div class="panel-footer">
+		    	<a href="{% url 'anamnese_responder' avaliacao.pk %}" class="btn btn-primary">Editar</a>
 	    	</div>
 	    	{% endif %}
 		</div>
