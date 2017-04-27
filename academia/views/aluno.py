@@ -5,20 +5,27 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.encoding import smart_text
 from django.utils.formats import date_format
 from graphos.sources.simple import SimpleDataSource
-from graphos.renderers.morris import LineChart
+from graphos.renderers.morris import LineChart, AreaChart
 
 from ..models import Usuario, Treino, AvaliacaoFisica
 from ..forms import AdicionarPessoaForm, EditarPessoaForm
 
 
-def gerar_grafico(avaliacoes):
+def gerar_grafico_gordura(avaliacoes):
     linhas = [('Data', '% de Gordura')]
-    for av in avaliacoes.values_list('data_realizada', 'dobra__resultado')[:10]:
+    for av in avaliacoes.values_list('data_realizada', 'dobra__resultado'):
         linhas.append((
             av[0], round(float(av[1]), 2) if av[1] else 0
         ))
     return linhas
 
+def gerar_grafico_perimetria(avaliacoes):
+    linhas = [('Data', 'Peso', 'Pescoco', 'Torax', 'Abdome', 'Quadril')]
+    for av in avaliacoes.values_list('data_realizada',
+        'perimetria__peso', 'perimetria__pescoco', 'perimetria__torax',
+        'perimetria__abdome', 'perimetria__quadril'):
+        linhas.append(av)
+    return linhas
 
 @login_required
 @user_passes_test(lambda u: u.tipo > 1)
@@ -34,11 +41,13 @@ def detalhar(request, pk):
     pessoa = Usuario.objects.get(pk=pk)
     treinos = Treino.objects.filter(pessoa=pessoa.pk)
     avaliacoes = AvaliacaoFisica.objects.filter(pessoa=pessoa.pk)
-    chart_ds = SimpleDataSource(gerar_grafico(avaliacoes))
-    chart = LineChart(chart_ds)
+    gordura_chart = LineChart(SimpleDataSource(
+        gerar_grafico_gordura(avaliacoes)))
+    perimetria_chart = LineChart(SimpleDataSource(
+        gerar_grafico_perimetria(avaliacoes)))
     return render(request, 'aluno/detalhar.html', {
         'pessoa': pessoa, 'treinos': treinos, 'avaliacoes': avaliacoes,
-        'chart': chart
+        'gordura_chart': gordura_chart, 'perimetria_chart': perimetria_chart
     })
 
 

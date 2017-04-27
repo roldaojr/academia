@@ -71,7 +71,16 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Avaliações Físicas</div>
 		    <div class="panel-body">
-		    	{{ chart.render_html }}
+		    	<div class="row">
+		    		<div class="col-md-6 col-sm-12">
+		    			<div class="caption">% de gordura</div>
+		    			{{ gordura_chart.render_html }}
+		    		</div>
+		    		<div class="col-md-6 col-sm-12">
+		    			<div class="caption">Perimetria</div>
+						{{ perimetria_chart.render_html }}
+		    		</div>
+		    	</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -109,5 +118,6 @@
 {% block extrascript %}
 <script type="text/javascript" src="{% static 'vendor/raphael/raphael.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/morrisjs/morris.min.js' %}"></script>
-{{ chart.render_js }}
+{{ gordura_chart.render_js }}
+{{ perimetria_chart.render_js }}
 {% endblock %}

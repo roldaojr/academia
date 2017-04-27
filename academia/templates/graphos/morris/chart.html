@@ -1,6 +1,8 @@
 <script type="text/javascript">
-var options = {{chart.get_options_json|safe}};
-var morris_dict = {
+var custom_options = {{chart.get_options_json|safe}};
+var options_{{ chart.get_html_id }} = {
+  resize: true,
+  hideHover: 'auto',
   // ID of the element in which to draw the chart.
   element: '{{ chart.get_html_id }}',
   // Chart data records -- each entry in this array corresponds to a point on
@@ -25,10 +27,10 @@ var morris_dict = {
     return dt.getDate()+'-'+dt.getMonth()+'-'+dt.getYear() % 100
   }
 };
-for(option in options) {
-  morris_dict[option] = options[option];
+for(option in custom_options) {
+  options_{{ chart.get_html_id }}[option] = custom_options[option]
 }
 $(document).ready(function() {
-  new Morris.{{ chart.chart_type }}(morris_dict);
+  new Morris.{{ chart.chart_type }}(options_{{ chart.get_html_id }})
 })
 </script>
