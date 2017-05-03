@@ -20,10 +20,14 @@ def gerar_grafico_gordura(avaliacoes):
     return linhas
 
 def gerar_grafico_perimetria(avaliacoes):
-    linhas = [('Data', 'Peso', 'Pescoco', 'Torax', 'Abdome', 'Quadril')]
+    linhas = [('Data', 'Peso', 'Pescoco', 'Torax', 'Cintura', 'Abdome', 'Quadril', 'Bicipes Direito', 'Bicipes Esquerdo',
+     'Tricipes Direito', 'Tricipes Esquerdo', 'Antebraço Direito', 'Antebraço Esquerdo', 'Coxa Direita', 'Coxa Esquerda', 
+     'Panturrilha Direta', 'Panturrilha Esquerda')]
     for av in avaliacoes.values_list('data_realizada',
-        'perimetria__peso', 'perimetria__pescoco', 'perimetria__torax',
-        'perimetria__abdome', 'perimetria__quadril'):
+        'perimetria__peso', 'perimetria__pescoco', 'perimetria__torax', 'perimetria__cintura',
+        'perimetria__abdome', 'perimetria__quadril', 'perimetria__bicipesdireito', 'perimetria__bicipesesquedo',
+        'perimetria__tricipesdireito', 'perimetria__tricipesesquerdo', 'perimetria__antebracodireito', 'perimetria__antebracoesquerdo', 
+        'perimetria__coxadireita', 'perimetria__coxaesquerda', 'perimetria__panturrilhadireta', 'perimetria__panturrilhaesquerda'):
         linhas.append(av)
     return linhas
 
