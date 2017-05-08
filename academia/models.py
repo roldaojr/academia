@@ -121,7 +121,12 @@ class Treino(models.Model):
     data_inicio = models.DateField(default=timezone.now)
     data_fim = models.DateField(default=refazer_dia)
     pessoa = models.ForeignKey(Usuario)
+    ativo = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        if self.ativo:
+            self.objects.filter(pessoa=self.pessoa).update(ativo=False)
+        return super(Treino, self).save(*args, **kwargs)
 
 dias_da_semana = (
     (0, 'Domingo'), (1, 'Segunda-feira'), (2, 'Terça-feira'),

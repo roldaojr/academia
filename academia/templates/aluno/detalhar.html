@@ -39,6 +39,7 @@
 							<th>Nome</th>
 							<th>Data de Início</th>
 							<th>Data de Fim</th>
+							<th>Ativo</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -48,6 +49,7 @@
 							<td>{{ treino.nome }}</td>
 							<td>{{ treino.data_inicio }}</td>
 							<td>{{ treino.data_fim }}</td>
+							<td>{{ treino.ativo|yesno:'Sim,Não' }}</td>
 							<td></td>
 							<td>
 								<a href="{% url 'serie_listar' treino.pk %}" class="btn btn-sm btn-primary">Detalhes</a>
