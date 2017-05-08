@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.encoding import smart_text
 from django.utils.formats import date_format
 from graphos.sources.simple import SimpleDataSource
-from graphos.renderers.morris import LineChart, AreaChart
-
+from graphos.renderers.highcharts import LineChart, AreaChart
 from ..models import Usuario, Treino, AvaliacaoFisica
 from ..forms import AdicionarPessoaForm, EditarPessoaForm
 
@@ -15,8 +14,10 @@ def gerar_grafico_gordura(avaliacoes):
     linhas = [('Data', '% de Gordura')]
     for av in avaliacoes.values_list('data_realizada', 'dobra__resultado'):
         linhas.append((
-            av[0], round(float(av[1]), 2) if av[1] else 0
+            date_format(av[0], 'SHORT_DATE_FORMAT'),
+            round(float(av[1]), 2) if av[1] else 0
         ))
+    print(linhas)
     return linhas
 
 def gerar_grafico_perimetria(avaliacoes):
@@ -47,8 +48,10 @@ def detalhar(request, pk):
     avaliacoes = AvaliacaoFisica.objects.filter(pessoa=pessoa.pk)
     gordura_chart = LineChart(SimpleDataSource(
         gerar_grafico_gordura(avaliacoes)))
+    gordura_chart.options['title'] = '% de gordura'
     perimetria_chart = LineChart(SimpleDataSource(
         gerar_grafico_perimetria(avaliacoes)))
+    perimetria_chart.options['title'] = 'Perimetria'
     return render(request, 'aluno/detalhar.html', {
         'pessoa': pessoa, 'treinos': treinos, 'avaliacoes': avaliacoes,
         'gordura_chart': gordura_chart, 'perimetria_chart': perimetria_chart

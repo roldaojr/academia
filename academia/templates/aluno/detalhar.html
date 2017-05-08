@@ -73,11 +73,9 @@
 		    <div class="panel-body">
 		    	<div class="row">
 		    		<div class="col-md-6 col-sm-12">
-		    			<div class="caption">% de gordura</div>
 		    			{{ gordura_chart.render_html }}
 		    		</div>
 		    		<div class="col-md-6 col-sm-12">
-		    			<div class="caption">Perimetria</div>
 						{{ perimetria_chart.render_html }}
 		    		</div>
 		    	</div>
@@ -112,12 +110,16 @@
 </div>
 {% endblock %}
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'vendor/morrisjs/morris.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'vendor/highcharts/css/highcharts.css' %}" type="text/css" />
+<style type="text/css">
+.highcharts-container {
+	height: auto;
+}
+</style>
 {% endblock %}
 
 {% block extrascript %}
-<script type="text/javascript" src="{% static 'vendor/raphael/raphael.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'vendor/morrisjs/morris.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/highcharts/js/highcharts.js' %}"></script>
 {{ gordura_chart.render_js }}
 {{ perimetria_chart.render_js }}
 {% endblock %}
