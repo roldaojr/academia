@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.forms.models import modelform_factory
 from django.contrib.auth.decorators import login_required
-from ..models import Serie
-from ..models import Exercicio
+from ..models import Serie, Treino, Exercicio
 
 
 @login_required
@@ -16,11 +15,12 @@ def listar(request, pk):
     else:
         form = SerieForm()
 
+    treino = Treino.objects.get(pk=pk)
     series = Serie.objects.filter(treino_id=pk).order_by('dia')
     exercicios = Exercicio.objects.all()
     return render(request, 'serie/listar.html', {
-        'series': series, 'exercicios': exercicios,
-        'tipo': 'serie', 'delete_url': reverse('serie_apagar', kwargs={'pk': 0}),
+        'series': series, 'exercicios': exercicios, 'treino': treino,
+        'tipo': 'serie','delete_url': reverse('serie_apagar', kwargs={'pk': 0}),
         'treino_id': pk, 'form': form
     })
 

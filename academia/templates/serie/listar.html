@@ -22,8 +22,13 @@
   </div>
 </div>
 
-<h1 class="page-header">Treino (série)</h1>
+<h1 class="page-header">Treino {{ treino.nome }}</h1>
 {% if request.user.tipo > 1 %}
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<a href="{% url 'treino_editar' treino.pk %}" class="btn btn-primary">Editar</a>
+    </div>
+</div>
 <div class="panel panel-default">
 	<div class="panel-heading">Selecione os Exercícios</div>
 	<div class="panel-body">

@@ -34,8 +34,10 @@ urlpatterns = [
     url(r'^aluno/listar$', aluno.listar, name='aluno_listar'),
 
     url(r'^treino/adicionar/(?P<pk>\d+)$', treino.adicionar, name='treino_adicionar'),
+    url(r'^treino/adicionar/$', treino.adicionar, name='treino_adicionar'),
     url(r'^treino/editar/(?P<pk>\d+)$', treino.editar, name='treino_editar'),
     url(r'^treino/apagar/(?P<pk>\d+)$', treino.apagar, name='treino_apagar'),
+    url(r'^treino/listar$', treino.listar, name='treino_listar'),
 
     url(r'^serie/apagar/(?P<pk>\d+)$', serie.apagar, name='serie_apagar'),
     url(r'^serie/listar/(?P<pk>\d+)$', serie.listar, name='serie_listar'),

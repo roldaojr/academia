@@ -1,0 +1,29 @@
+{%extends 'base_site.html' %}
+{% block conteudo %}
+<h1 class="page-header">Modelos de treino</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<a href="{% url 'treino_adicionar' %}" class="btn btn-success">Adicionar</a>
+    </div>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Ativo</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for treino in treinos %}
+		<tr>
+			<td>{{ treino.nome }}</td>
+			<td>{{ treino.ativo|yesno:'Sim,Não' }}</td>
+			<td>
+				<a href="{% url 'serie_listar' treino.pk %}"  class="btn btn-sm btn-primary">Detalhes</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

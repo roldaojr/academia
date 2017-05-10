@@ -118,14 +118,17 @@ class Perimetria(models.Model):
 
 class Treino(models.Model):
     nome = models.CharField(max_length=100)
-    data_inicio = models.DateField(default=timezone.now)
-    data_fim = models.DateField(default=refazer_dia)
-    pessoa = models.ForeignKey(Usuario)
+    data_inicio = models.DateField(default=timezone.now, null=True)
+    data_fim = models.DateField(default=refazer_dia, null=True)
+    pessoa = models.ForeignKey(Usuario, null=True)
     ativo = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.nome
+
     def save(self, *args, **kwargs):
-        if self.ativo:
-            self.objects.filter(pessoa=self.pessoa).update(ativo=False)
+        if self.ativo and self.pessoa_id:
+            Treino.objects.filter(pessoa=self.pessoa_id).update(ativo=False)
         return super(Treino, self).save(*args, **kwargs)
 
 dias_da_semana = (

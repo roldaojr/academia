@@ -39,6 +39,7 @@
                         <li><a href="{% url 'aluno_listar' %}"><i class="fa fa-user fa-fw"></i> Alunos</a></li>
                         <li><a href"#"><i class="fa fa-cog fa-fw"></i><b> Configurações </b></a></li>
                         <li><a href="{% url 'exercicio_listar' %}"><i class="fa fa-child fa-fw"></i> Exercícios</a></li>
+                        <li><a href="{% url 'treino_listar' %}"><i class="fa fa-child fa-fw"></i> Modelos de Treino</a></li>
                         <li><a href="{% url 'anamnese_listar' %}"><i class="fa fa-edit fa-fw"></i> Perguntas Anamnese</a></li>
                         {% endif %}
                         {% if request.user.tipo == 3 %}
