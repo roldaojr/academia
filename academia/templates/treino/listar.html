@@ -18,7 +18,6 @@
 		{% for treino in treinos %}
 		<tr>
 			<td>{{ treino.nome }}</td>
-			<td>{{ treino.ativo|yesno:'Sim,Não' }}</td>
 			<td>
 				<a href="{% url 'serie_listar' treino.pk %}"  class="btn btn-sm btn-primary">Detalhes</a>
 			</td>

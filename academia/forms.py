@@ -34,13 +34,13 @@ class TreinoForm(forms.ModelForm):
 
 class AdicionarTreinoForm(TreinoForm):
     modelo = forms.ModelChoiceField(queryset=Treino.objects.filter(
-        pessoa=None, ativo=True), required=False)
+        pessoa=None), required=False)
 
 
 class ModeloTreinoForm(forms.ModelForm):
      class Meta:
          model = Treino
-         exclude = ('pessoa', 'data_inicio', 'data_fim')
+         exclude = ('pessoa', 'data_inicio', 'data_fim', 'ativo')
 
 
 AvaliacaoForm = modelform_factory(AvaliacaoFisica, exclude=('pessoa',))
