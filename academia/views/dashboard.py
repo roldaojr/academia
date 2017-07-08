@@ -13,7 +13,7 @@ def treinoexpirado(request):
         return redirect('aluno_detalhar', pk=request.user.pk)
 
     #treino expirado
-    treinos = Treino.objects.filter(data_fim__lte=now())
+    treinos = Treino.objects.filter(data_fim__lte=now(), ativo=True)
 
     #treino expirando
     hoje = date.today()
