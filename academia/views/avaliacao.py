@@ -3,12 +3,16 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from ..models import AvaliacaoFisica, Usuario
 from ..forms import AvaliacaoForm
+from ..tabela_percent_gordura import tabela_percent_gordura
 
 
 @login_required
 def detalhar(request, pk):
     avaliacao = AvaliacaoFisica.objects.get(pk=pk)
-    return render(request, 'avaliacao/detalhar.html', {'avaliacao': avaliacao})
+    gordura = tabela_percent_gordura(avaliacao.dobra, avaliacao.pessoa)
+    return render(request, 'avaliacao/detalhar.html', {
+        'avaliacao': avaliacao, 'gordura': gordura
+    })
 
 
 @login_required
