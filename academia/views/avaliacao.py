@@ -9,7 +9,10 @@ from ..tabela_percent_gordura import tabela_percent_gordura
 @login_required
 def detalhar(request, pk):
     avaliacao = AvaliacaoFisica.objects.get(pk=pk)
-    gordura = tabela_percent_gordura(avaliacao.dobra, avaliacao.pessoa)
+    if hasattr(avaliacao, 'dobra'):
+        gordura = tabela_percent_gordura(avaliacao.dobra, avaliacao.pessoa)
+    else:
+        gordura = None
     return render(request, 'avaliacao/detalhar.html', {
         'avaliacao': avaliacao, 'gordura': gordura
     })
