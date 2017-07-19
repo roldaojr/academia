@@ -5,6 +5,7 @@ from django.forms.models import modelform_factory
 from django.contrib.auth.decorators import login_required
 from ..models import Dobra
 from ..percent_gordura import formulas
+from ..tabela_percent_gordura import tabela_percent_gordura
 
 
 DobraForm = modelform_factory(Dobra, exclude=('avaliacaofisica', 'resultado'))
