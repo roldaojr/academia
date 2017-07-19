@@ -90,7 +90,10 @@
 				{% if avaliacao.dobra %}
 				<table class="table">
 					<tr><th>Método</th><td colspan="3">{{ avaliacao.dobra.get_metodo_display|default:'-' }}</td></tr>
-					<tr><th>Resultado</th><td colspan="3">{{ avaliacao.dobra.resultado|floatformat:2|default:'-' }} {{ gordura }}</td></tr>
+					<tr>
+						<th>Resultado</th><td>{{ avaliacao.dobra.resultado|floatformat:2|default:'-' }}</td>
+						<th>Nível</th><td>{{ gordura }}</td>
+					</tr>
 					<tr>
 						<th>Tricipes</th><td>{{ avaliacao.dobra.tricipes|default:'-' }}</td>
 						<th>Bicipes</th><td>{{ avaliacao.dobra.bicipes|default:'-' }}</td>
@@ -126,6 +129,7 @@
 	    	{% endif %}
 		</div>
 	</div>
+	<hr>
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Anamnese</div>
